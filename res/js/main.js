@@ -1,4 +1,4 @@
-const canvas = document.getElementById("canvas");
+/*const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const background = new Image();
 background.src = "./res/img/background.png";
@@ -43,3 +43,113 @@ window.onload = () => {
     } ,100);
 }
 
+*/
+
+
+
+
+
+
+
+
+
+
+/*
+// []  - pole
+// index - poradove cislo prvku pocita od 0
+//            0  1
+const foo = [5, 6]
+
+// index        0          1        2       3
+const names = ["radek", "tomas", "petr", "radim"]
+names[3]="jan"
+console.log(names[3]);
+*/
+
+
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d")
+
+
+const background = new Image();
+background.src = "./res/img/background.png"
+
+/*
+// promenna - vymezene misto v pameti
+// {} - objekt - promenna, ktera ma ruzne vlastnosti
+// [] - array - pole - skupina vicero hodnot - soubor prvku
+const zombie = {
+    name: "Tomas",
+    hp: 100,
+    dmg: 6,
+    drop: 15
+}
+console.log(zombie.dmg); //6
+zombie.hp -= 50;
+*/
+
+
+//promenna pro ukladani vstupu z klavesnice
+//Space: true
+//Space: false
+const keys = {};
+
+
+//funkce ktera posloucha na nejakou akci (event)
+document.addEventListener("keydown", (e) => {
+    keys[e.code] = true; // Space: true
+
+});
+document.addEventListener("keyup", (e) => {
+    keys[e.code] = false; // Space: false
+
+});
+
+
+
+
+
+
+
+
+
+//herni smycka
+const gameLoop = () => {
+   console.log(keys);
+    //resizeCanvas
+resizeCanvas();
+
+    //clearCanvas
+clearCanvas();
+
+   //update
+   update();
+   
+    //render
+    render();
+
+    //fps
+    getFps();
+    window.requestAnimationFrame(gameLoop);
+
+}
+const resizeCanvas = () => {
+    canvas.width = 1280;
+    canvas.height = 720;
+}
+const clearCanvas = () => {
+    //premaluje cele platno pozadim hry
+    ctx.drawImage(background, 0,0, 1280, 720);
+}
+const update = () => {}
+const render = () => {}
+const getFps = () => {}
+
+
+//když se načte stranka, tak se provede funkce
+window.onload = () => {
+
+    //jakmile se stranka nacte, vyzadame si prvni snimek herni smycky
+    window.requestAnimationFrame(gameLoop);
+}
