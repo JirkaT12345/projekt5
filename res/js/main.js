@@ -1,3 +1,13 @@
+import { Zombie } from "./Zombie.js";
+import { Background } from "./ui/basic-utils.js";
+/*
+const myZombie = new Zombie("Tomas",5,0,150);
+myZombie.walk();
+*/
+
+
+
+
 /*const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const background = new Image();
@@ -66,14 +76,12 @@ names[3]="jan"
 console.log(names[3]);
 */
 
+const background = new Background();
 
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d")
 
-
-const background = new Image();
-background.src = "./res/img/background.png"
 
 /*
 // promenna - vymezene misto v pameti
@@ -116,7 +124,7 @@ document.addEventListener("keyup", (e) => {
 
 //herni smycka
 const gameLoop = () => {
-   console.log(keys);
+  // console.log(keys);
     //resizeCanvas
 resizeCanvas();
 
@@ -140,7 +148,7 @@ const resizeCanvas = () => {
 }
 const clearCanvas = () => {
     //premaluje cele platno pozadim hry
-    ctx.drawImage(background, 0,0, 1280, 720);
+ background.draw(ctx)
 }
 const update = () => {}
 const render = () => {}
