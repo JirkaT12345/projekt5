@@ -1,6 +1,6 @@
 //kopie od sablony (tridy-class)
 // se rika instance (objekt-object)
-
+//metoda fce ktera patri objektu
 export class Background {
 
     constructor() {

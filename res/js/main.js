@@ -1,9 +1,9 @@
 import { Zombie } from "./Zombie.js";
 import { Background } from "./ui/basic-utils.js";
-/*
-const myZombie = new Zombie("Tomas",5,0,150);
-myZombie.walk();
-*/
+
+const MyZombie = new Zombie("Tomas",5,0,150,8);
+MyZombie.walk();
+
 
 
 
@@ -150,8 +150,12 @@ const clearCanvas = () => {
     //premaluje cele platno pozadim hry
  background.draw(ctx)
 }
-const update = () => {}
-const render = () => {}
+const update = () => {
+    MyZombie.update();
+}
+const render = () => {
+    MyZombie.draw(ctx)
+}
 const getFps = () => {}
 
 
