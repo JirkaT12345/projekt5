@@ -13,31 +13,51 @@ static zombies = [];
         this.ratio = 0.3;
         this.size = {
             width: 100 * this.ratio,
-            height: 180 * this.ratio,
+            height: 200 * this.ratio,
         };
 
         this.position = {
-            x:600,
+            x: this.generateRandomInteger(0,1100),
             y:180,
         };
 this.velocity={
     x:1,
     y:1,
-    ratio: 0.005
-};
+    ratio: this.speed,
+    };
+    this.counter = 0;
+}
 
-    }
+respawn(){
+    this.position = {
+        x: this.generateRandomInteger(0,1100),
+        y:180,
+    };
+    this.ratio = 0.3;
+}
+
+
+    generateRandomInteger(min, max) {
+        return Math.floor(min + Math.random() * (max - min + 1));
+      }
+
+
     draw(ctx) {
         ctx.drawImage(this.img,  this.position.x, this.position.y, this.size.width, this.size.height,);
         
             };
             //metoda sluzi pro chozeni
     walk() {
+        this.counter++;
+        if(this.counter>=10){
+            this.counter = 0;
+            this.ratio +=0.01
+        }
         //pozici x posouvame o ulozenou silu ( velocitu )
-        this.position.x-=this.velocity.ratio * 30;
-        this.position.y+= this.velocity.y;
+        this.position.x-=this.velocity.ratio * 0.05;
+        this.position.y+= this.speed;
         //prenastavujeme vetsi ratio - opticka zmena pro zombika - vypada vetsi
-        this.ratio+=this.velocity.ratio
+       // this.ratio+=this.velocity.ratio
         //prenastavujeme rozmer podle noveho ratia
         this.size = {
             width: 100 * this.ratio,
@@ -46,6 +66,9 @@ this.velocity={
     }
     //metoda ktera slouzi pro aktualizace zombika
     update(){
+        if (this.position.y > 720){
+            this.respawn();
+        }
         this.walk();
     }
     //metoda ktera nastavi obrazek pro zombika
