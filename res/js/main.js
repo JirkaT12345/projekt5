@@ -1,8 +1,7 @@
 import { Zombie } from "./Zombie.js";
 import { Background } from "./ui/basic-utils.js";
 
-const MyZombie = new Zombie("Tomas",5,0,150,8);
-MyZombie.walk();
+
 
 
 
@@ -151,17 +150,35 @@ const clearCanvas = () => {
  background.draw(ctx)
 }
 const update = () => {
-    MyZombie.update();
+    Zombie.zombies.map((zombie) => {
+        zombie.update();
+    });
 }
 const render = () => {
-    MyZombie.draw(ctx)
+    Zombie.zombies.map((zombie) => {
+        zombie.draw(ctx);
+    });
 }
 const getFps = () => {}
 
+//funkce pro nacitani dat
+const loadData = async () => {
+    //nacteme soubor s daty pro zombies
+    //pokud v nejake funkci pouzivame await tak funkci musime oznacit slovem async
+    const zombieFile= await fetch("./res/data/zombies.json")
+    //prekonvertuje soubor na json
+    const zombiesData = await zombieFile.json();
+//nastavime tride Zombies zombiesData
+Zombie.zombiesData = zombiesData;
+
+};
+
 
 //když se načte stranka, tak se provede funkce
-window.onload = () => {
+window.onload = async () => {
+  await loadData();
+  Zombie.genZombies();
 
     //jakmile se stranka nacte, vyzadame si prvni snimek herni smycky
     window.requestAnimationFrame(gameLoop);
-}
+};

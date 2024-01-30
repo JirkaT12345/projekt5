@@ -1,11 +1,14 @@
 export class Zombie {
-    constructor(name, hp, dmg, speed, type) {
+//static - dana vec patri tride - volame pomoci - NazevTridy.neco - Zombie.zombiesData
+static zombiesData;
+//v tomto atributu se budou ukladat vsechny zombies
+static zombies = [];
+    constructor(name, hp, speed, path) {
         this.name = name;
         this.hp = hp;
-        this.dmg = dmg;
         this.speed = speed;
         this.img = new Image();
-        this.setType(type);
+        this.path = path;
         this.img.src = this.path;
         this.ratio = 0.3;
         this.size = {
@@ -46,8 +49,8 @@ this.velocity={
         this.walk();
     }
     //metoda ktera nastavi obrazek pro zombika
-    setType(type){
-        //pole ktere obsahuje vsechny cesty k obrazkum zombiku
+   /*  setType(type){
+       //pole ktere obsahuje vsechny cesty k obrazkum zombiku
         const paths = [
             "./res/img/zombies/zombie1.png",
             "./res/img/zombies/zombie2.png",
@@ -64,6 +67,17 @@ this.velocity={
         ];
         //nastavime atribut path - vybere cestu z pole paths podle indexu(parametru type)
 this.path = paths[type];
+    }*/
+    static genZombies() {
+        Zombie.zombiesData.map((zombie) => {
+            Zombie.zombies.push(
+                new Zombie(
+                    zombie.name,
+                    zombie.hp,
+                    zombie.speed,
+                    zombie.path));
+
+         });
     }
 }
 
