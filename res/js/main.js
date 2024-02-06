@@ -1,5 +1,8 @@
 import { Zombie } from "./Zombie.js";
-import { Background } from "./ui/basic-utils.js";
+import { Background,Crosshair } from "./ui/basic-utils.js";
+
+const background = new Background();
+const crosshair = new Crosshair();
 
 
 
@@ -75,7 +78,7 @@ names[3]="jan"
 console.log(names[3]);
 */
 
-const background = new Background();
+/*const background = new Background();*/
 
 
 const canvas = document.getElementById("canvas");
@@ -113,8 +116,18 @@ document.addEventListener("keyup", (e) => {
 
 });
 
+let mouseX;
+let mouseY;
 
 
+document.addEventListener("mousemove",(e)=>{
+    const rect = canvas.getBoundingClientRect();
+    mouseX= (e.clientX - rect.left)/(rect.right - rect.left) * canvas.width;
+    mouseY= (e.clientY - rect.top)/(rect.bottom - rect.top) * canvas.height;
+    console.log(mouseX);
+    console.log(mouseY);
+   
+})
 
 
 
@@ -158,6 +171,7 @@ const render = () => {
     Zombie.zombies.map((zombie) => {
         zombie.draw(ctx);
     });
+    crosshair.draw(ctx,mouseX,mouseY);
 }
 const getFps = () => {}
 
