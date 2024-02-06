@@ -37,8 +37,8 @@ export class Crosshair {
         };
     }
     draw(ctx,mouseX,mouseY) {
-        this.position.x=mouseX
-        this.position.y=mouseY
+        this.position.x=mouseX - this.size.width/2;
+        this.position.y=mouseY - this.size.height /2;
         ctx.drawImage(this.img,  this.position.x, this.position.y, this.size.width, this.size.height,)
         
             }
