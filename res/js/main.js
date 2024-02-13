@@ -1,9 +1,10 @@
 import { Zombie } from "./Zombie.js";
-import { Background,Crosshair } from "./ui/basic-utils.js";
+import { Background,Crosshair,Healthbar } from "./ui/basic-utils.js";
+
 
 const background = new Background();
 const crosshair = new Crosshair();
-
+const healthbar = new Healthbar(1250);
 
 
 
@@ -56,13 +57,6 @@ window.onload = () => {
 }
 
 */
-
-
-
-
-
-
-
 
 
 
@@ -129,6 +123,20 @@ document.addEventListener("mousemove",(e)=>{
    
 })
 
+document.addEventListener("click", (e) => {
+    
+    for (const zombie of Zombie.zombies) {
+        if (
+            zombie.position.x < crosshair.position.x + 50 &&
+            zombie.position.x + zombie.size.width > crosshair.position.x + crosshair.size.width / 2 &&
+            zombie.position.y < crosshair.position.y + 50 &&
+            zombie.position.y + zombie.size.height > crosshair.position.y + crosshair.size.height / 2
+          ) {
+            zombie.respawn();
+          }
+          
+    }
+});
 
 
 
@@ -164,7 +172,7 @@ const clearCanvas = () => {
 }
 const update = () => {
     Zombie.zombies.map((zombie) => {
-        zombie.update();
+        zombie.update(healthbar);
     });
 }
 const render = () => {
@@ -172,6 +180,7 @@ const render = () => {
         zombie.draw(ctx);
     });
     crosshair.draw(ctx,mouseX,mouseY);
+    healthbar.draw(ctx)
 }
 const getFps = () => {}
 

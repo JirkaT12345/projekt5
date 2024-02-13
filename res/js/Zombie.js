@@ -65,8 +65,9 @@ respawn(){
         };
     }
     //metoda ktera slouzi pro aktualizace zombika
-    update(){
+    update(healthbar){
         if (this.position.y > 720){
+            healthbar.hp -=10;
             this.respawn();
         }
         this.walk();
